@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "9fdeadce-9c2c-4d65-b368-acc0d5518497",
+		"name": "ContactsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12659559",
+		"_collection_link": "https://hj5555-1638.postman.co/workspace/404a7ac0-8b5e-4397-87f5-46997eb8ad9c/collection/12659559-9fdeadce-9c2c-4d65-b368-acc0d5518497?action=share&source=collection_link&creator=12659559"
+	},
+	"item": [
+		{
+			"name": "Login User-GetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response= pm.response.json();\r",
+							"const tokenID=response.token;\r",
+							"console.log(\"token ID\" , tokenID);\r",
+							"pm.collectionVariables.set(\"myTokenID\",\"Bearer \" +tokenID);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"bhavani.ste2008@gmail.com\",\n    \"password\": \"darling@143\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETAllContacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/67a7432f81016d001366fd2e",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"67a7432f81016d001366fd2e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"cypress\",\n    \"lastName\": \"automation\",\n    \"birthdate\": \"1999-01-01\",\n    \"email\": \"zainab@gmail.com\",\n    \"phone\": \"9898987778\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Contact",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"api\",\n    \"lastName\": \"testing\",\n    \"birthdate\": \"1999-01-01\",\n    \"email\": \"cypress@gmail.com\",\n    \"phone\": \"9898987778\",\n    \"city\": \"Bangalore\",\n    \"country\": \"United States\",\n    \"stateProvince\": \"KA\",\n    \"street1\": \"abc street\",\n    \"street2\": \"pest\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts/67ae4151fd836b0013cb2856",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"67ae4151fd836b0013cb2856"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Contact",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/67a746e640303a00131fc605",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"67a746e640303a00131fc605"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Partial Contact",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myTokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Address\": \"abc1\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts/67a4e7c1168ad20013438088",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"67a4e7c1168ad20013438088"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2E0ZTVmNTE2OGFkMjAwMTM0MzgwN2EiLCJpYXQiOjE3MzkwMTcxMTZ9.nbrT7GAdPyrxMenDNPYGConQahndGT5WYGcVO7Z8Q_U",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/users/logout",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://thinking-tester-contact-list.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "myTokenID",
+			"value": ""
+		}
+	]
+}
